@@ -2,11 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Room } from './room/dbLayer/room.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
-
-console.log('debug', process.env.DB_URL)
+import { AppController } from './app.controller';
 
 @Module({
+  controllers:[AppController],
   imports: [
     ConfigModule.forRoot({ isGlobal: true}),
     TypeOrmModule.forRootAsync({
