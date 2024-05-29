@@ -1,5 +1,6 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Res } from '@nestjs/common';
 import { RoomService } from './room.service';
+import { Response } from 'express';
 
 @Controller('rooms')
 export class RoomController {
@@ -11,6 +12,7 @@ export class RoomController {
         @Query('limit') limit: number,
         @Query('filters') filters: string,
         @Query('sort') sort: string,
+        @Res() res: Response
     ) {
         const parsedFilters = filters ? JSON.parse(filters) : [];
         const parsedSort = sort ? JSON.parse(sort) : [];
@@ -20,6 +22,19 @@ export class RoomController {
             filters: parsedFilters,
             sort: parsedSort,
         };
-        return this.roomService.findAll(options);
+        const data =  await this.roomService.findAll(options);
+
+        return res.status(200).json(data)
+    }
+
+    @Get('insert')
+    async insert(
+        @Res() res:Response
+    ){
+        await this.roomService.insertRooms()
+
+        return res.status(200).json({
+            message:"Done"
+        })
     }
 }

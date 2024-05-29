@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoomService } from './room.service';
 import { RoomController } from './room.controller';
-import { RoomRepository } from './dbLayer/room.repository';
 import TypeormHelperModule from 'src/TypeormHelper/typeormHelper.module';
+import { Room } from './dbLayer/room.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([RoomRepository]),
+        TypeOrmModule.forFeature([Room]),
         TypeormHelperModule
     ],
     providers: [RoomService],
