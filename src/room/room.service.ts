@@ -17,7 +17,7 @@ export class RoomService {
         this.typeormHelperService.applyPagination(query, { page: options.page, limit: options.limit });
         this.typeormHelperService.applyFilters(query, options.filters);
         this.typeormHelperService.applySorting(query, options.sort);
-
+ 
         const [items, total] = await query.getManyAndCount();
         return { items, total };
     }

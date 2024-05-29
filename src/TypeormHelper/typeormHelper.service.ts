@@ -54,10 +54,12 @@ export class TypeormHelperService {
         return query;
     }
 
-    applySorting<T>(query: SelectQueryBuilder<T>, sort: SortI[]): SelectQueryBuilder<T> {
+    applySorting<T>(query: SelectQueryBuilder<T>, sort: SortI[]): 
+    SelectQueryBuilder<T> {
         sort.forEach(s => {
-            query.addOrderBy(s.field, s.order);
+            query.addOrderBy(s.field == 'userId' ? 'id' : s.field, s.order);
         });
-        return query;
+        return query; 
     }
 }
+ 
