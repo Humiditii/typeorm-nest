@@ -7,8 +7,8 @@ import { Room } from './room/dbLayer/room.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 3306,
+      host: process.env.DB_HOST,
+      port: <number>(process.env.DB_PORT as any),
       username: process.env.DB_USER,
       password: process.env.PASSWORD,
       database: process.env.DB_INUSE,
